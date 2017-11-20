@@ -27,50 +27,18 @@
  */
 
 // %Tag(FULLTEXT)%
+#include "LaserCallback.hpp"
 #include "ros/ros.h"
 #include "std_msgs/Bool.h"
 #include "sensor_msgs/LaserScan.h"
 #include "tf/transform_listener.h"
 #include <iostream>
-#include <math.h>
 
-/**
- * In the callback function, the listener node replies what it received from the talker node.
- * If the user didn't modify the original message through change_string service, the listener 
- * replies with "I heard nothing new".
- */
-// %Tag(CALLBACK)%
 
-std_msgs::Bool vel_msg;
-
-void scanProcess(const sensor_msgs::LaserScan& msg) {
-  int lengthArray;
-  float minimal = msg.range_max;
-  lengthArray = (sizeof(msg.ranges)/sizeof(msg.ranges[0]));
-
-  for (auto i: msg.ranges){
-    if (i < minimal){
-      minimal = i;
-    }
-  }
-
-  std::cout << "minimal value: " << minimal << std::endl;
-
-  if (minimal < 1 || std::isnan(minimal)) {
-    vel_msg.data = false;
-  }else{
-    vel_msg.data = true;
-  }
-
- // ROS_INFO("The minimal range is: %f", minimal);
-//ROS_INFO("The length of array is: %d ", lengthArray);
-}
-// %EndTag(CALLBACK)%
-
-int main(int argc, char **argv) {
-    
+int main(int argc, char **argv) {    
   
-
+  LaserCallback laserCallback;
+  std_msgs::Bool vel_msg;
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -106,7 +74,7 @@ int main(int argc, char **argv) {
    * away the oldest ones.
    */
 // %Tag(SUBSCRIBER)%
-  ros::Subscriber sub = n.subscribe("scan", 1000, scanProcess);
+  ros::Subscriber sub = n.subscribe("scan", 1000, &LaserCallback::callback, &laserCallback);
   ros::Publisher vel_pub = n.advertise<std_msgs::Bool>("/laserReading/motion_mode",1000);
 // %EndTag(SUBSCRIBER)%
 
@@ -119,6 +87,7 @@ int main(int argc, char **argv) {
 // %Tag(SPIN)%
   while(ros::ok()){
     ros::spinOnce();
+    vel_msg.data = laserCallback.motionMode();
     vel_pub.publish(vel_msg);    
     loop_rate.sleep();
   }
