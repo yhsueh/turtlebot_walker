@@ -71,8 +71,8 @@ int main(int argc, char **argv)
    * buffer up before throwing some away.
    */
   ros::Publisher ctrl_pub = n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1000);
-  ros::Subscriber sub = n.subscribe("/LaserReading/motion_mode", 1000, motion_callback);
-  ros::Rate loop_rate(5);
+  ros::Subscriber sub = n.subscribe("/laserReading/motion_mode", 1000, motion_callback);
+  ros::Rate loop_rate(10);
 
   /**
    * A count of how many messages we have sent. This is used to create

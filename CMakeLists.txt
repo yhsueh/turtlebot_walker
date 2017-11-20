@@ -205,9 +205,9 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-add_executable(LaserReading src/LaserReading.cpp)
-target_link_libraries(LaserReading ${catkin_LIBRARIES})
-add_dependencies(LaserReading ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_executable(laserReading src/laserReading.cpp)
+target_link_libraries(laserReading ${catkin_LIBRARIES})
+add_dependencies(laserReading ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 add_executable(turtleCtrl src/turtleCtrl.cpp)
 target_link_libraries(turtleCtrl ${catkin_LIBRARIES})

@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
    * You must call one of the versions of ros::init() before using any other
    * part of the ROS system.
    */
-  ros::init(argc, argv, "LaserReading");
+  ros::init(argc, argv, "laserReading");
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -107,10 +107,10 @@ int main(int argc, char **argv) {
    */
 // %Tag(SUBSCRIBER)%
   ros::Subscriber sub = n.subscribe("scan", 1000, scanProcess);
-  ros::Publisher vel_pub = n.advertise<std_msgs::Bool>("/LaserReading/motion_mode",1000);
+  ros::Publisher vel_pub = n.advertise<std_msgs::Bool>("/laserReading/motion_mode",1000);
 // %EndTag(SUBSCRIBER)%
 
-  ros::Rate loop_rate(5);
+  ros::Rate loop_rate(10);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()
