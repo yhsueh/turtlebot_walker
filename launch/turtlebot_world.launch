@@ -35,7 +35,7 @@
   </node>
 
 	<node pkg="turtlebot_walker" name="laserReading" type="laserReading" output="screen"/>
-	<node pkg="turtlebot_walker" name="turtleCtrl" type="turtleCtrl" output="screen"/>
+	<node pkg="turtlebot_walker" name="turtleCtrl" type="turtleCtrl"/>
 
 	<node pkg="rosbag" type="record" name="topics_record"
        args="record --duration=30s -a -o $(find turtlebot_walker)/results/bagfile -x (.*)/camera(.*)"

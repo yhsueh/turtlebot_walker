@@ -7,6 +7,7 @@
 
 void LaserCallback::callback(const sensor_msgs::LaserScan::ConstPtr& msg) {
   int lengthArray;
+  minimal = 10;
   lengthArray = (sizeof(msg->ranges)/sizeof(msg->ranges[0]));
 
   for (auto i: msg->ranges){
@@ -14,14 +15,20 @@ void LaserCallback::callback(const sensor_msgs::LaserScan::ConstPtr& msg) {
       minimal = i;
     }
   }
-  
+
   std::cout << "minimal value: " << minimal << std::endl;
 }
 
+
 bool LaserCallback::motionMode() {
-	if (minimal < 1 || std::isnan(minimal)) {
-    	return false;
-  	}else{
-    	return true;
-  	}
-}
+	    if (minimal < 1 || std::isnan(minimal)) {
+      return false;
+    }else{
+      return true;
+    }
+
+  }
+
+
+
+

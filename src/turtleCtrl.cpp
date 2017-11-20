@@ -72,7 +72,7 @@ int main(int argc, char **argv)
    */
   ros::Publisher ctrl_pub = n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1000);
   ros::Subscriber sub = n.subscribe("/laserReading/motion_mode", 1000, motion_callback);
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(30);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -81,7 +81,6 @@ int main(int argc, char **argv)
   int count = 0;
   while (ros::ok())
   {    
-    ROS_INFO("HITurtleCtrl");
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type

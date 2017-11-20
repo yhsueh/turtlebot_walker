@@ -33,6 +33,7 @@
 #include "sensor_msgs/LaserScan.h"
 #include "tf/transform_listener.h"
 #include <iostream>
+#include <math.h>
 
 
 int main(int argc, char **argv) {    
@@ -77,8 +78,7 @@ int main(int argc, char **argv) {
   ros::Subscriber sub = n.subscribe("scan", 1000, &LaserCallback::callback, &laserCallback);
   ros::Publisher vel_pub = n.advertise<std_msgs::Bool>("/laserReading/motion_mode",1000);
 // %EndTag(SUBSCRIBER)%
-
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(30);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()
@@ -88,10 +88,9 @@ int main(int argc, char **argv) {
   while(ros::ok()){
     ros::spinOnce();
     vel_msg.data = laserCallback.motionMode();
-    vel_pub.publish(vel_msg);    
+    vel_pub.publish(vel_msg);
     loop_rate.sleep();
-  }
- 
+}
 // %EndTag(SPIN)%
 
   return 0;
