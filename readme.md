@@ -14,39 +14,21 @@ catkin_make
 ```
 to build the ROS package.
 
-## Procedures for viewing tf:
-1. Create four terminals. Make sure to source the package in each of the terminal.
-
-2. Run roslaunch file to start gazebo.
+## Procedures for running the turtlebot simulation:
+1. Run roslaunch file to start gazebo, and two necessary nodes.
 ```
 roslaunch turtlebot_walker turtlebot_world.launch
 ```
-
-
-## Procedures for using roslaunch to record topics and read the bagfile:
-1. Similar to last section. Create four terminals and repeat the procedures until the forth step.
-
-2. Input
+The simulation can be recorded if record_flag is set to 1;
 ```
-roslaunch beginner_tutorials node.launch record_flag:=1
+roslaunch turtlebot_walker turtlebot_world.launch record_flag:=1
 ```
-If no argument is passed, record_flag is set to 0 by default, and no topics is recorded.
+
+2. Switch back to gazebo and view the simulation.
 
 3. 
 See what topics is recorded
 ```
-cd {"beginner_package"}/results
+cd {"turtlebot_walker"}/results
 rosbag info bagfile.bag
 ```
-
-4. Replay chatter messages using listener node
-```
-rosrun beginner_tutorials listener
-
-```
-then in a different terminal
-```
-rosbag play bagfile.bag
-```
-
-
