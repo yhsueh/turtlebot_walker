@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   #rospy
   std_msgs
   sensor_msgs
+  geometry_msgs
   #tf
 )
 
@@ -76,6 +77,7 @@ find_package(catkin REQUIRED COMPONENTS
    DEPENDENCIES
    std_msgs
    sensor_msgs
+   geometry_msgs
  )
 
 ################################################
@@ -206,3 +208,7 @@ include_directories(
 add_executable(LaserReading src/LaserReading.cpp)
 target_link_libraries(LaserReading ${catkin_LIBRARIES})
 add_dependencies(LaserReading ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+add_executable(turtleCtrl src/turtleCtrl.cpp)
+target_link_libraries(turtleCtrl ${catkin_LIBRARIES})
+add_dependencies(turtleCtrl ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

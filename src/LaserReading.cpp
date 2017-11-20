@@ -28,7 +28,7 @@
 
 // %Tag(FULLTEXT)%
 #include "ros/ros.h"
-//#include "std_msgs/String.h"
+#include "std_msgs/String.h"
 #include "sensor_msgs/LaserScan.h"
 #include "tf/transform_listener.h"
 #include <iostream>
@@ -92,6 +92,7 @@ int main(int argc, char **argv) {
    */
 // %Tag(SUBSCRIBER)%
   ros::Subscriber sub = n.subscribe("scan", 1000, scanProcess);
+  //ros::Publisher vel_pub = n.advertise();
 // %EndTag(SUBSCRIBER)%
   /*
    tf::TransformListener listener;
@@ -113,7 +114,7 @@ int main(int argc, char **argv) {
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
 // %Tag(SPIN)%
-  ros::spin();
+  ros::spinOnce();
 // %EndTag(SPIN)%
 
   return 0;
