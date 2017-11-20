@@ -1,7 +1,33 @@
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
+#include "std_msgs/Bool.h"
 
 #include <sstream>
+#include <iostream>
+
+geometry_msgs::Twist msg;
+void motion_callback(const std_msgs::Bool& vel_msg){
+  //ROS_INFO("MSGDATA is: %d"vel_msg.data);
+  std::cout << "MSGDATA is : " << vel_msg.data << std::endl;
+  if (vel_msg.data) {
+      msg.linear.x = 0.5;
+      msg.linear.y = 0.0;
+      msg.linear.z = 0.0;
+
+      msg.angular.x= 0.0;
+      msg.angular.y = 0.0;
+      msg.angular.z = 0.0;
+    }
+    else{
+      msg.linear.x = 0.0;
+      msg.linear.y = 0.0;
+      msg.linear.z = 0.0;
+
+      msg.angular.x= 0.0;
+      msg.angular.y = 0.0;
+      msg.angular.z = 0.5;
+    }
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -45,8 +71,8 @@ int main(int argc, char **argv)
    * buffer up before throwing some away.
    */
   ros::Publisher ctrl_pub = n.advertise<geometry_msgs::Twist>("/mobile_base/commands/velocity", 1000);
-
-  ros::Rate loop_rate(10);
+  ros::Subscriber sub = n.subscribe("/LaserReading/motion_mode", 1000, motion_callback);
+  ros::Rate loop_rate(5);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -54,38 +80,16 @@ int main(int argc, char **argv)
    */
   int count = 0;
   while (ros::ok())
-  {
-    /**
-     * This is a message object. You stuff it with data, and then publish it.
-     */
-    geometry_msgs::Twist msg;
-
-    int mode2; // 0 = rotate, 1 = linear;
-
-
-    ros::Subscriber sub = n.subscribe("motion_mode", 1000, scanProcess);
-
-    if (mode) {
-      msg.linear.x = 2.0;
-      msg.linear.y = 0.0;
-      msg.linear.z = 0.0;
-
-      msg.angular.x= 0.0;
-      msg.angular.y = 0.0;
-      msg.angular.z = 0.0;
-    }
-
-    ROS_INFO("HI1");
+  {    
+    ROS_INFO("HITurtleCtrl");
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
      * given as a template parameter to the advertise<>() call, as was done
      * in the constructor above.
      */
-    ctrl_pub.publish(msg);
-
     ros::spinOnce();
-
+    ctrl_pub.publish(msg);
     loop_rate.sleep();
   }
 

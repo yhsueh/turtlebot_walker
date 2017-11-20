@@ -28,10 +28,11 @@
 
 // %Tag(FULLTEXT)%
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Bool.h"
 #include "sensor_msgs/LaserScan.h"
 #include "tf/transform_listener.h"
 #include <iostream>
+#include <math.h>
 
 /**
  * In the callback function, the listener node replies what it received from the talker node.
@@ -39,6 +40,9 @@
  * replies with "I heard nothing new".
  */
 // %Tag(CALLBACK)%
+
+std_msgs::Bool vel_msg;
+
 void scanProcess(const sensor_msgs::LaserScan& msg) {
   int lengthArray;
   float minimal = msg.range_max;
@@ -50,12 +54,23 @@ void scanProcess(const sensor_msgs::LaserScan& msg) {
     }
   }
 
-  ROS_INFO("The minimal range is: %f", minimal);
-  ROS_INFO("The length of array is: %d ", lengthArray);
+  std::cout << "minimal value: " << minimal << std::endl;
+
+  if (minimal < 1 || std::isnan(minimal)) {
+    vel_msg.data = false;
+  }else{
+    vel_msg.data = true;
+  }
+
+ // ROS_INFO("The minimal range is: %f", minimal);
+//ROS_INFO("The length of array is: %d ", lengthArray);
 }
 // %EndTag(CALLBACK)%
 
 int main(int argc, char **argv) {
+    
+  
+
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
@@ -92,29 +107,22 @@ int main(int argc, char **argv) {
    */
 // %Tag(SUBSCRIBER)%
   ros::Subscriber sub = n.subscribe("scan", 1000, scanProcess);
-  //ros::Publisher vel_pub = n.advertise();
+  ros::Publisher vel_pub = n.advertise<std_msgs::Bool>("/LaserReading/motion_mode",1000);
 // %EndTag(SUBSCRIBER)%
-  /*
-   tf::TransformListener listener;
-   ros::Rate rate(10.0);
 
-   tf::StampedTransform transform;
-   try{
-   listener.lookupTransform("/world", "/talker",  
-   ros::Time(0), transform);
-   }
-   catch (tf::TransformException ex){
-   ROS_ERROR("%s",ex.what());
-   ros::Duration(1.0).sleep();
-   }
-   */
+  ros::Rate loop_rate(5);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
 // %Tag(SPIN)%
-  ros::spinOnce();
+  while(ros::ok()){
+    ros::spinOnce();
+    vel_pub.publish(vel_msg);    
+    loop_rate.sleep();
+  }
+ 
 // %EndTag(SPIN)%
 
   return 0;
