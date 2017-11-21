@@ -36,11 +36,9 @@
  * Find the least distance from the laser range data.
  */
 void LaserCallback::callback(const sensor_msgs::LaserScan::ConstPtr& msg) {
-  int lengthArray;
   minimal = 10;
-  lengthArray = (sizeof(msg->ranges) / sizeof(msg->ranges[0]));
 
-  for (auto i : msg->ranges) {
+  for (auto &i : msg->ranges) {
     if (i < minimal) {
       minimal = i;
     }
