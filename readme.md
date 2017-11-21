@@ -1,7 +1,7 @@
 ## Build procedures:
 1. Clone turtlebot_walker branch from github by inputting
 ```
-git clone -b turtlebot_walker https://github.com/yhsueh/beginner_tutorials.git
+git clone -b turtlebot_walker https://github.com/yhsueh/turtlebot_walker.git
 ```
 
 2. Move beginner_tutorials into src folder in your catkin_ws.
