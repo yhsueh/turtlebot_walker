@@ -29,13 +29,13 @@
  */
 
 // %Tag(FULLTEXT)%
-#include "LaserCallback.hpp"
+
+#include <math.h>
+#include <iostream>
 #include "ros/ros.h"
 #include "std_msgs/Bool.h"
+#include "LaserCallback.hpp"
 #include "sensor_msgs/LaserScan.h"
-#include "tf/transform_listener.h"
-#include <iostream>
-#include <math.h>
 
 int main(int argc, char **argv) {
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
   ros::Publisher vel_pub = n.advertise < std_msgs::Bool
       > ("/laserReading/motion_mode", 1000);
   ros::Rate loop_rate(30);
-    
+
   while (ros::ok()) {
   	ros::spinOnce();
     vel_msg.data = laserCallback.motionMode();

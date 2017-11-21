@@ -27,10 +27,11 @@
  */
 
 #include "LaserCallback.hpp"
+#include <math.h>
+#include <iostream>
 #include "ros/ros.h"
 #include "std_msgs/Bool.h"
 #include "sensor_msgs/LaserScan.h"
-#include <math.h> 
 
 /**
  * Find the least distance from the laser range data.
@@ -56,6 +57,5 @@ bool LaserCallback::motionMode() {
   } else {
     return true;
   }
-
 }
 

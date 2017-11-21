@@ -1,0 +1,39 @@
+
+\begin{DoxyEnumerate}
+\item Clone turtlebot\+\_\+walker branch from github by inputting 
+\begin{DoxyCode}
+1 git clone -b turtlebot\_walker https://github.com/yhsueh/beginner\_tutorials.git
+\end{DoxyCode}
+
+\item Move beginner\+\_\+tutorials into src folder in your catkin\+\_\+ws.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Make sure R\+O\+S\+\_\+\+P\+A\+C\+K\+A\+G\+E\+\_\+\+P\+A\+TH enviroment variable contain the workspace folder. This is done by sourcing the generated setup file under devel folder in the parent directory.
+\item Input 
+\begin{DoxyCode}
+1 catkin\_make
+\end{DoxyCode}
+ to build the R\+OS package.
+\end{DoxyEnumerate}
+
+\subsection*{Procedures for running the turtlebot simulation\+:}
+
+
+\begin{DoxyEnumerate}
+\item Run roslaunch file to start gazebo, and two necessary nodes. 
+\begin{DoxyCode}
+1 roslaunch turtlebot\_walker turtlebot\_world.launch
+\end{DoxyCode}
+ The simulation can be recorded if record\+\_\+flag is set to 1; 
+\begin{DoxyCode}
+1 roslaunch turtlebot\_walker turtlebot\_world.launch record\_flag:=1
+\end{DoxyCode}
+
+\item Switch back to gazebo and view the simulation.
+\item See what topics is recorded 
+\begin{DoxyCode}
+1 cd \{"turtlebot\_walker"\}/results
+2 rosbag info bagfile.bag
+\end{DoxyCode}
+ 
+\end{DoxyEnumerate}

@@ -1,0 +1,52 @@
+\hypertarget{laserReading_8cpp}{}\section{src/laser\+Reading.cpp File Reference}
+\label{laserReading_8cpp}\index{src/laser\+Reading.\+cpp@{src/laser\+Reading.\+cpp}}
+
+
+This node takes and analyze the range data. Subsequently, pass the the decision made based on the data to the turtle\+Ctrl node which manipulates the turtlebot.  
+
+
+{\ttfamily \#include \char`\"{}Laser\+Callback.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Bool.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}tf/transform\+\_\+listener.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+Include dependency graph for laser\+Reading.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{laserReading_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{laserReading_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This node takes and analyze the range data. Subsequently, pass the the decision made based on the data to the turtle\+Ctrl node which manipulates the turtlebot. 
+
+
+
+\subsection{Function Documentation}
+\index{laser\+Reading.\+cpp@{laser\+Reading.\+cpp}!main@{main}}
+\index{main@{main}!laser\+Reading.\+cpp@{laser\+Reading.\+cpp}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{laserReading_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{laserReading_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+The ros\+::init() function needs to see argc and argv so that it can perform any R\+OS arguments and name remapping that were provided at the command line. For programmatic remappings you can use a different version of init() which takes remappings directly, but for most command-\/line programs, passing argc and argv is the easiest way to do it. The third argument to init() is the name of the node.
+
+You must call one of the versions of ros\+::init() before using any other part of the R\+OS system.
+
+Node\+Handle is the main access point to communications with the R\+OS system. The first Node\+Handle constructed will fully initialize this node, and the last Node\+Handle destructed will close down the node.
+
+The subscribe() call is how you tell R\+OS that you want to receive messages on a given topic. This invokes a call to the R\+OS master node, which keeps a registry of who is publishing and who is subscribing. Messages are passed to a callback function, here called chatter\+Callback. subscribe() returns a Subscriber object that you must hold on to until you want to unsubscribe. When all copies of the Subscriber object go out of scope, this callback will automatically be unsubscribed from this topic.
+
+The second parameter to the subscribe() function is the size of the message queue. If messages are arriving faster than they are being processed, this is the number of messages that will be buffered up before beginning to throw away the oldest ones.

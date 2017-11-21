@@ -27,12 +27,11 @@
  *  laserReading node and pass the velocities message to the turtlebot.
  */
 
+#include <sstream>
+#include <iostream>
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "std_msgs/Bool.h"
-
-#include <sstream>
-#include <iostream>
 
 geometry_msgs::Twist msg; /**<The geometry msgs that would be sent to the mobile node */
 
@@ -112,11 +111,6 @@ int main(int argc, char **argv) {
                                     motion_callback);
   ros::Rate loop_rate(30);
 
-  /**
-   * A count of how many messages we have sent. This is used to create
-   * a unique string for each message.
-   */
-  int count = 0;
   while (ros::ok()) {
     /**
      * The publish() function is how you send messages. The parameter

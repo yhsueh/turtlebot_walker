@@ -1,0 +1,63 @@
+\hypertarget{classLaserCallback}{}\section{Laser\+Callback Class Reference}
+\label{classLaserCallback}\index{Laser\+Callback@{Laser\+Callback}}
+
+
+{\ttfamily \#include $<$Laser\+Callback.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLaserCallback_ab3c530049c01190fcb107019cd36c256}{Laser\+Callback} ()=default
+\item 
+void \hyperlink{classLaserCallback_ac721e42c1d2d3de0d1eff3ff1134544e}{callback} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&\hyperlink{turtleCtrl_8cpp_aba2f97176e275688941f5c2a40324b8a}{msg})
+\item 
+bool \hyperlink{classLaserCallback_ad5caf1c0a4d7f6bb87c61a59b6f1d3b5}{motion\+Mode} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classLaserCallback_a0405af031c7694991b9b32f5956cbc36}{minimal} = 10
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Laser\+Callback@{Laser\+Callback}!Laser\+Callback@{Laser\+Callback}}
+\index{Laser\+Callback@{Laser\+Callback}!Laser\+Callback@{Laser\+Callback}}
+\subsubsection[{\texorpdfstring{Laser\+Callback()=default}{LaserCallback()=default}}]{\setlength{\rightskip}{0pt plus 5cm}Laser\+Callback\+::\+Laser\+Callback (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classLaserCallback_ab3c530049c01190fcb107019cd36c256}{}\label{classLaserCallback_ab3c530049c01190fcb107019cd36c256}
+
+
+\subsection{Member Function Documentation}
+\index{Laser\+Callback@{Laser\+Callback}!callback@{callback}}
+\index{callback@{callback}!Laser\+Callback@{Laser\+Callback}}
+\subsubsection[{\texorpdfstring{callback(const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&msg)}{callback(const sensor_msgs::LaserScan::ConstPtr &msg)}}]{\setlength{\rightskip}{0pt plus 5cm}void Laser\+Callback\+::callback (
+\begin{DoxyParamCaption}
+\item[{const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&}]{msg}
+\end{DoxyParamCaption}
+)}\hypertarget{classLaserCallback_ac721e42c1d2d3de0d1eff3ff1134544e}{}\label{classLaserCallback_ac721e42c1d2d3de0d1eff3ff1134544e}
+Handling callback
+
+Find the least distance from the laser range data. \index{Laser\+Callback@{Laser\+Callback}!motion\+Mode@{motion\+Mode}}
+\index{motion\+Mode@{motion\+Mode}!Laser\+Callback@{Laser\+Callback}}
+\subsubsection[{\texorpdfstring{motion\+Mode()}{motionMode()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Laser\+Callback\+::motion\+Mode (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLaserCallback_ad5caf1c0a4d7f6bb87c61a59b6f1d3b5}{}\label{classLaserCallback_ad5caf1c0a4d7f6bb87c61a59b6f1d3b5}
+1 means there is not obstacles ahead, and 0 otherwise.
+
+Set the motion mode. 1 when the path is clear. 0 when obstacles present. 
+
+\subsection{Member Data Documentation}
+\index{Laser\+Callback@{Laser\+Callback}!minimal@{minimal}}
+\index{minimal@{minimal}!Laser\+Callback@{Laser\+Callback}}
+\subsubsection[{\texorpdfstring{minimal}{minimal}}]{\setlength{\rightskip}{0pt plus 5cm}float Laser\+Callback\+::minimal = 10}\hypertarget{classLaserCallback_a0405af031c7694991b9b32f5956cbc36}{}\label{classLaserCallback_a0405af031c7694991b9b32f5956cbc36}
+The minimal distance from the range measurments 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{LaserCallback_8hpp}{Laser\+Callback.\+hpp}\item 
+src/\hyperlink{LaserCallback_8cpp}{Laser\+Callback.\+cpp}\end{DoxyCompactItemize}

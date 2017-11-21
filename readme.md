@@ -26,9 +26,10 @@ roslaunch turtlebot_walker turtlebot_world.launch record_flag:=1
 
 2. Switch back to gazebo and view the simulation.
 
-3. 
-See what topics is recorded
+3. See what topics are recorded with rosbag info and rosbag play. Change directory to results folder. Before running rosbag play, make sure roscore is up and running.
 ```
+roscore
 cd {"turtlebot_walker"}/results
 rosbag info bagfile.bag
+rosbag play bagfile.bag
 ```
